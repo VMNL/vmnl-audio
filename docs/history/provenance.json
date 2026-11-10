@@ -1,0 +1,21 @@
+{
+  "source_origin": "git@github.com:VMNL/vmnl.git",
+  "source_branch": "feat/miniaudio-wrapper-clean",
+  "source_sha": "6880cd632a922e2d187e126ae2f86ee2eeafbbac",
+  "filter_repo_commit": "6f79afc8c90c592a3052e6cc53c2ca8907515bca",
+  "filter_repo_release": "v2.47.0",
+  "selected_paths": [
+    "crates/vmnl_audio/",
+    "crates/vmnl_native/src/audio/",
+    "tests/audio/",
+    "docs/audio.md",
+    "docs/miniaudio_wrapper.md",
+    "docs/api/reference/audio.md",
+    "LICENSE"
+  ],
+  "git-filter-repo_sha256": "67447413e273fc76809289111748870b6f6072f08b17efe94863a92d810b7d94",
+  "destination_origin": "https://github.com/VMNL/vmnl-audio",
+  "filtered_head": "412a79471f013483fb5dbd61059046916021e82b",
+  "import_merge": "d977224e580e5b3b6020aba6af5660d43c089f0e",
+  "standalone_commit": "31f6db3637c533ca1bf6fe9be00a328e0a6b335f"
+}

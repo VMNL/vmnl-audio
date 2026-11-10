@@ -1,0 +1,2 @@
+# Preserve archived harness output, including its final blank line.
+docs/qualification/**/*.log whitespace=-blank-at-eof

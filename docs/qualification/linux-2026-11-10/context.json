@@ -1,0 +1,104 @@
+{
+  "source_sha": "c4c7b8793a5fbd2a8d80ddba3b4da31332f835c3",
+  "worktree": "M tests/audio/backend.rs\n?? tests/audio/backend_lifecycle.rs",
+  "platform": "Linux-7.2.11-200.fc44.x86_64-x86_64-with-glibc2.43",
+  "rustc": "rustc 1.95.0 (59807616e 2026-04-14)\nbinary: rustc\ncommit-hash: 59807616e1fa2540724bfbac14d7976d7e4a3860\ncommit-date: 2026-04-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.95.0\nLLVM version: 22.1.2",
+  "alsa_version": "1.2.16.1",
+  "cpal_version": "0.18.2",
+  "default_sink_before": {
+    "command": [
+      "pactl",
+      "get-default-sink"
+    ],
+    "code": 0,
+    "stdout": "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink",
+    "stderr": ""
+  },
+  "sink_volume_before": {
+    "command": [
+      "wpctl",
+      "get-volume",
+      "@DEFAULT_AUDIO_SINK@"
+    ],
+    "code": 0,
+    "stdout": "Volume: 0.25",
+    "stderr": ""
+  },
+  "alsa_routes": {
+    "command": [
+      "aplay",
+      "-L"
+    ],
+    "code": 0,
+    "stdout": "null\n    Discard all samples (playback) or generate zero samples (capture)\npipewire\n    PipeWire Sound Server\ndefault\n    Default ALSA Output (currently PipeWire Media Server)\nsysdefault:CARD=sofhdadsp\n    sof-hda-dsp, \n    Default Audio Device",
+    "stderr": ""
+  },
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=5s",
+    "90s",
+    "cargo",
+    "test",
+    "--test",
+    "audio-backend",
+    "--locked",
+    "--",
+    "--ignored",
+    "--test-threads=1",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 7.629302175000703,
+  "default_sink_after": {
+    "command": [
+      "pactl",
+      "get-default-sink"
+    ],
+    "code": 0,
+    "stdout": "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink",
+    "stderr": ""
+  },
+  "sink_volume_after": {
+    "command": [
+      "wpctl",
+      "get-volume",
+      "@DEFAULT_AUDIO_SINK@"
+    ],
+    "code": 0,
+    "stdout": "Volume: 0.25",
+    "stderr": ""
+  },
+  "host_route_unchanged": true,
+  "test_source_sha256": {
+    "tests/audio/allocation_probe.rs": "94e7c4d78fd11afc1995ff1aacfd52e760063805d6c4f4c60864e3187dfe45d1",
+    "tests/audio/backend.rs": "2b96deb4d5c4594f2d3a5cea87434715b190fc7165d9124add133f6fa2571322",
+    "tests/audio/backend_lifecycle.rs": "bbf6e0676aadf72e11046f0dda934e5bc9ad563a6abb1215d97ee30975d3d699",
+    "tests/audio/backend_support.rs": "19b594baa3c902dc9ca745a7dde5cc2a1e3963d4c0ea09f0b60477bb1937d0fd",
+    "tests/audio/backend_worker.rs": "0122e1ac0f3106fc8299705f6cade34aeb382c93d84ba34273bac148bf8be9ca",
+    "tests/audio/bus.rs": "83111a26a354a48cb3efd2d731005c6d841cd8eb4037548658498f0f594fe6fd",
+    "tests/audio/common/mod.rs": "71d1ce79e2d09172fb0ce4b573729361b462d5513e90024633315e04ed2c3a55",
+    "tests/audio/contracts.rs": "c703e23ac8b1c7bfbc90d6791dc963ead4103ed546c4282220178f8abc04780f",
+    "tests/audio/decoding.rs": "e7a127bc8f460ff804e81011253d456d3929b83605584c640de624ef15744b73",
+    "tests/audio/example_assets.rs": "761e64016771f69518b6b8ca3246dc843f239e83da9ccb318c1dc619c535450d",
+    "tests/audio/float_wav.rs": "33fd507c74c68695460be43bb79f19fee78286a08d2d4e0a8e2c842586879e02",
+    "tests/audio/gain_semantics.rs": "698ee4d5e26e3ef537065b566ff274e57ad7490a7c09526edd432d3596e4f1a6",
+    "tests/audio/internal_harness.rs": "934fbdf9e44ffd2b63a16662262b4d7b7a0134e73f422cadb49109cbf5f1dcbb",
+    "tests/audio/main.rs": "524de4aaa13232c60c743b46fa83e6a86a5053e399d49c4b813f313e6cea6551",
+    "tests/audio/ogg_chains.rs": "44560cc540b9ef96ba95ed0bb5f4bed3e3c186e136f24fffd93a0440c8c448af",
+    "tests/audio/ogg_playback.rs": "46d61ab791021172dd03b2193c512820cbf83cddbf9c39d19e51434c69390d9b",
+    "tests/audio/output_config.rs": "3a044deb7cef64ee42be66b54d8f23c42f04405efd1633d18ae21b125beedbef",
+    "tests/audio/playback.rs": "53850007b670b3130552da52dfb2129d49a5925d2ee04ba28b783d10a0ee4f67",
+    "tests/audio/playback_states.rs": "6521f9fb3b4259edce34728d23e5626c7f558bc402d749e03ff3e6aab90aa92b",
+    "tests/audio/realtime.rs": "f0fe67b74f326dcda9adb8db13089970ab20853aa9e3921d7b667115ee55c9ed",
+    "tests/audio/runtime_mixer.rs": "74193a2a85f185ae69f4bd416e6ed13034c3e4eb8d738d7f5b5b64a0f9d97bd9",
+    "tests/audio/snapshots.rs": "7784756f070fd76393f811215cb67a8f188acd36ea8fb2d09bfad8b35d28fca2",
+    "tests/audio/worker.rs": "291071bb09e0183f41a8035c6790130b5400a3ad74eee7864f0faeec99300a12"
+  },
+  "pipewire_version": "pipewire\nCompiled with libpipewire 1.6.10\nLinked with libpipewire 1.6.10",
+  "production_src_tree": "b8423f9f12d0ab242f8dbe5268d9c132da290263",
+  "cargo_lock_sha256": "006567e9460c51cc3547f42f392cabd3c80fd19f128f71a80034a8ee818e3783",
+  "native_test_probe_sha256": "bbf6e0676aadf72e11046f0dda934e5bc9ad563a6abb1215d97ee30975d3d699",
+  "evidence_scope": "Runtime at source_sha, with the new native probe and test registration changes; all test source checksums are recorded. No listening or realtime qualification.",
+  "package_dry_run_source_sha": "c4c7b8793a5fbd2a8d80ddba3b4da31332f835c3"
+}

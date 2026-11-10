@@ -1,0 +1,37 @@
+[
+  {
+    "case": "play_sound-eof",
+    "code": 0,
+    "elapsed_seconds": 0.037307868000425515,
+    "stdout": "Playing. Press Enter to close the device.\n",
+    "stderr": ""
+  },
+  {
+    "case": "stream_music-eof",
+    "code": 0,
+    "elapsed_seconds": 0.03421042199988733,
+    "stdout": "Streaming. Press Enter to close the device.\n",
+    "stderr": ""
+  },
+  {
+    "case": "playback_controls-eof",
+    "code": 0,
+    "elapsed_seconds": 0.031511131001025205,
+    "stdout": "pause | resume | volume <0..1> | mute | unmute | loop on/off | stop | play | status | quit\n",
+    "stderr": ""
+  },
+  {
+    "case": "manual_control-eof",
+    "code": 0,
+    "elapsed_seconds": 0.03301508300137357,
+    "stdout": "Manual control. Press Enter to stop.\n",
+    "stderr": ""
+  },
+  {
+    "case": "interactive-commands",
+    "code": 0,
+    "commands": "status\npause\nstatus\nresume\nvolume 0.2\nmute\nloop on\nstop\nstatus\nresume\nstatus\nplay\nstatus\nunmute\nloop off\nquit\n",
+    "stdout": "pause | resume | volume <0..1> | mute | unmute | loop on/off | stop | play | status | quit\nplaying=true paused=false stopped=false cursor=0 frames muted=false\nplaying=false paused=true stopped=false cursor=0 frames muted=false\nplaying=false paused=false stopped=true cursor=0 frames muted=true\nplaying=false paused=false stopped=true cursor=0 frames muted=true\nplaying=true paused=false stopped=false cursor=0 frames muted=true\n",
+    "stderr": ""
+  }
+]
