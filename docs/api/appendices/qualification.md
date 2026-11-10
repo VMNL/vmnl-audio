@@ -14,3 +14,7 @@ shutdown, disconnection/recovery, listening, container padding/timing and callba
 deadline qualification remain separate work. See [test protocol](../../testing.md)
 and the [technical acceptance target](../../audio.md). No evidence is implied by
 merely documenting a platform or providing a probe.
+
+Local Linux native startup/control/teardown observations are recorded in the
+[qualification inventory](../../qualification.md), with source checksums, raw
+results and explicit exclusions. They are not hosted-CI or listening evidence.

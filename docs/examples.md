@@ -10,9 +10,17 @@
 Each accepts `--help` before any device construction and an optional filename:
 
 ```sh
+just run
+just run play_sound
+just run stream_music /path/to/track.flac
+just run manual_control --help
 cargo run --example stream_music --locked -- /path/to/track.flac
 cargo run --example playback_controls --locked -- --help
 ```
+
+`just run` selects `playback_controls` by default. The first optional argument
+selects another Cargo example; subsequent arguments are forwarded separately,
+preserving quoted file paths such as `just run stream_music "music/my track.wav"`.
 
 The interactive commands are `pause`, `resume`, `volume 0.5`, `mute`, `unmute`,
 `loop on`, `loop off`, `stop`, `play`, `status` and `quit`. `play` stops the previous

@@ -23,6 +23,12 @@ root package's `CARGO_MANIFEST_DIR`. It does not widen the public API or replace
 tests against the compiled public library.
 
 Native probes require a usable stereo output route and must fail if setup fails.
+The lifecycle probe runs ten cycles per control mode at zero master gain. It
+retains resources and handles across device destruction, checks positive PCM
+consumption before drop and unchanged cursors for a 100 ms observation afterwards.
+It prints resolved configuration and control-thread build/drop durations with
+`--nocapture`; those observations do not establish timing guarantees. Recorded
+results and remaining requirements belong to [qualification status](qualification.md).
 Record the source SHA, OS, compiler, CPAL version, output route and resolved rate,
 and initial mute/volume settings. Keep host audio settings fixed. Use an external
 watchdog to bound a hung run; a timeout is a failure, not a shutdown guarantee.

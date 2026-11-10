@@ -7,6 +7,7 @@
 // round trips and controlled PCM samples, not approximate DSP measurements.
 #![allow(clippy::expect_used, clippy::panic, clippy::float_cmp)]
 
+mod backend_lifecycle;
 mod backend_support;
 mod backend_worker;
 mod bus;

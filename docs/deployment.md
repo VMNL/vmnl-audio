@@ -17,6 +17,8 @@ it neither publishes nor qualifies native devices or realtime behavior.
 - Complete/review the import PR and first compatibility baseline; no release is
   implied by the development manifest or a draft PR.
 - Review the [platform evidence](platform_support.md) at the exact candidate SHA.
+  The [qualification inventory](qualification.md) separates recorded Linux native
+  scenarios from the remaining platform, operator and timing requirements.
   Native startup/error/shutdown, listening and realtime requirements in the
   [audio contract](audio.md) remain independent qualification work. Resolve them
   or explicitly narrow the release contract before claiming qualification.

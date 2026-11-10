@@ -1,0 +1,39 @@
+    Finished `test` profile [optimized + debuginfo] target(s) in 0.04s
+     Running tests/audio/backend.rs (target/debug/deps/audio_backend-72ff82727b9b7bf6)
+
+running 12 tests
+test backend_lifecycle::device_drop_stops_consumption_while_resources_and_handles_stay_alive ... native_lifecycle mode=Manual iteration=1 rate=44100 channels=2 master_volume=0 build_us=33139 drop_us=1899 sound_frames=512 music_frames=512
+native_lifecycle mode=Manual iteration=2 rate=44100 channels=2 master_volume=0 build_us=22544 drop_us=1317 sound_frames=512 music_frames=512
+native_lifecycle mode=Manual iteration=3 rate=44100 channels=2 master_volume=0 build_us=19839 drop_us=1925 sound_frames=512 music_frames=512
+native_lifecycle mode=Manual iteration=4 rate=44100 channels=2 master_volume=0 build_us=19115 drop_us=1496 sound_frames=1536 music_frames=512
+native_lifecycle mode=Manual iteration=5 rate=44100 channels=2 master_volume=0 build_us=21528 drop_us=2417 sound_frames=512 music_frames=512
+native_lifecycle mode=Manual iteration=6 rate=44100 channels=2 master_volume=0 build_us=19044 drop_us=1250 sound_frames=512 music_frames=512
+native_lifecycle mode=Manual iteration=7 rate=44100 channels=2 master_volume=0 build_us=20316 drop_us=1897 sound_frames=1536 music_frames=512
+native_lifecycle mode=Manual iteration=8 rate=44100 channels=2 master_volume=0 build_us=19692 drop_us=1611 sound_frames=1536 music_frames=512
+native_lifecycle mode=Manual iteration=9 rate=44100 channels=2 master_volume=0 build_us=21079 drop_us=1305 sound_frames=512 music_frames=512
+native_lifecycle mode=Manual iteration=10 rate=44100 channels=2 master_volume=0 build_us=20841 drop_us=1477 sound_frames=512 music_frames=512
+native_lifecycle mode=Automatic iteration=1 rate=44100 channels=2 master_volume=0 build_us=16171 drop_us=1281 sound_frames=1024 music_frames=1024
+native_lifecycle mode=Automatic iteration=2 rate=44100 channels=2 master_volume=0 build_us=19990 drop_us=1813 sound_frames=512 music_frames=512
+native_lifecycle mode=Automatic iteration=3 rate=44100 channels=2 master_volume=0 build_us=18331 drop_us=1422 sound_frames=1536 music_frames=512
+native_lifecycle mode=Automatic iteration=4 rate=44100 channels=2 master_volume=0 build_us=18657 drop_us=1076 sound_frames=1024 music_frames=1024
+native_lifecycle mode=Automatic iteration=5 rate=44100 channels=2 master_volume=0 build_us=19223 drop_us=1210 sound_frames=1536 music_frames=512
+native_lifecycle mode=Automatic iteration=6 rate=44100 channels=2 master_volume=0 build_us=17644 drop_us=1575 sound_frames=1024 music_frames=1024
+native_lifecycle mode=Automatic iteration=7 rate=44100 channels=2 master_volume=0 build_us=17233 drop_us=892 sound_frames=1024 music_frames=1024
+native_lifecycle mode=Automatic iteration=8 rate=44100 channels=2 master_volume=0 build_us=18537 drop_us=1733 sound_frames=1536 music_frames=512
+native_lifecycle mode=Automatic iteration=9 rate=44100 channels=2 master_volume=0 build_us=21341 drop_us=1220 sound_frames=512 music_frames=512
+native_lifecycle mode=Automatic iteration=10 rate=44100 channels=2 master_volume=0 build_us=20512 drop_us=1519 sound_frames=512 music_frames=512
+ok
+test backend_worker::automatic_worker_refills_music_without_client_update_calls ... ok
+test backend_worker::default_device_constructors_resolve_to_manual_control ... ok
+test backend_worker::failed_automatic_worker_rejects_public_control_calls ... ok
+test backend_worker::manual_mode_requires_update_to_refill_an_exhausted_music_buffer ... ok
+test bus::bus_clones_share_volume_mute_pause_and_effective_gain ... ok
+test playback::chained_ogg_is_rejected_by_sound_loading_and_music_prefill ... ok
+test playback::chained_ogg_late_refill_error_stops_the_public_music_handle ... ok
+test playback::device_load_methods_report_unknown_extensions_and_missing_files ... ok
+test playback::extreme_float_wav_sound_and_music_complete_through_the_public_api ... ok
+test playback::music_handle_clones_share_pause_stop_volume_and_looping_state ... ok
+test playback::sound_handle_clones_control_the_same_playback_instance ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 7.56s
+

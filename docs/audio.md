@@ -12,7 +12,9 @@ against which the remaining implementation work is evaluated.
 `vmnl_audio` uses CPAL directly, without a facade or graphics dependency. Its control worker
 is disabled by default. Terminal states, consumed-frame cursors, live looping,
 mute/pause semantics, and snapshot heap behaviour have device-independent regression coverage.
-Native shutdown and realtime timing remain unqualified. The audio test files are registered as
+Linux native startup/control and nominal teardown have a
+[scoped qualification record](qualification.md). Cross-platform shutdown and realtime
+timing remain unqualified. The audio test files are registered as
 separate [device-independent and native Cargo targets](testing.md#audio-tests); their scope does
 not establish complete acceptance of the execution defaults or native backend.
 

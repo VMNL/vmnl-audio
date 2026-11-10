@@ -1,0 +1,43 @@
+{
+  "source_base_sha": "c4c7b8793a5fbd2a8d80ddba3b4da31332f835c3",
+  "justfile_sha256": "cb20c84984552aec554ab4e7a1617ada18080a69b3cffb9e3b31f5a017e29296",
+  "scope": "Additional Just run recipe on the unchanged production sources; actual native startup/EOF and help paths, not listening evidence.",
+  "cases": [
+    {
+      "case": "just-help-play_sound",
+      "code": 0,
+      "stdout": "Play one cached sound; Enter or EOF exits.\nUsage: [--help] [audio-file]\nThe bundled effect.wav is used by default.\n",
+      "stderr": "cargo run --locked --example \"$1\" -- \"${@:2}\"\n    Finished `dev` profile [optimized + debuginfo] target(s) in 0.04s\n     Running `target/debug/examples/play_sound --help`\n"
+    },
+    {
+      "case": "just-help-stream_music",
+      "code": 0,
+      "stdout": "Stream music; Enter or EOF exits.\nUsage: [--help] [audio-file]\nThe bundled music.wav is used by default.\n",
+      "stderr": "cargo run --locked --example \"$1\" -- \"${@:2}\"\n    Finished `dev` profile [optimized + debuginfo] target(s) in 0.04s\n     Running `target/debug/examples/stream_music --help`\n"
+    },
+    {
+      "case": "just-help-playback_controls",
+      "code": 0,
+      "stdout": "pause | resume | volume <0..1> | mute | unmute | loop on/off | stop | play | status | quit\nUsage: [--help] [audio-file]\nThe bundled music.wav is used by default.\n",
+      "stderr": "cargo run --locked --example \"$1\" -- \"${@:2}\"\n    Finished `dev` profile [optimized + debuginfo] target(s) in 0.04s\n     Running `target/debug/examples/playback_controls --help`\n"
+    },
+    {
+      "case": "just-help-manual_control",
+      "code": 0,
+      "stdout": "Manual streaming; Enter, EOF or track completion exits.\nUsage: [--help] [audio-file]\nThe bundled music.wav is used by default.\n",
+      "stderr": "cargo run --locked --example \"$1\" -- \"${@:2}\"\n    Finished `dev` profile [optimized + debuginfo] target(s) in 0.04s\n     Running `target/debug/examples/manual_control --help`\n"
+    },
+    {
+      "case": "just-default-eof",
+      "code": 0,
+      "stdout": "pause | resume | volume <0..1> | mute | unmute | loop on/off | stop | play | status | quit\n",
+      "stderr": "cargo run --locked --example \"$1\" -- \"${@:2}\"\n    Finished `dev` profile [optimized + debuginfo] target(s) in 0.04s\n     Running `target/debug/examples/playback_controls`\n"
+    },
+    {
+      "case": "just-path-with-spaces",
+      "code": 0,
+      "stdout": "Streaming. Press Enter to close the device.\n",
+      "stderr": "cargo run --locked --example \"$1\" -- \"${@:2}\"\n    Finished `dev` profile [optimized + debuginfo] target(s) in 0.04s\n     Running `target/debug/examples/stream_music '/tmp/vmnl audio ry7v48eq/track'\\''s [mono].wav'`\n"
+    }
+  ]
+}

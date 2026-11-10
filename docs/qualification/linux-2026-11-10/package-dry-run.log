@@ -1,0 +1,9 @@
+    Updating crates.io index
+   Packaging vmnl_audio v0.1.0 (/home/h/p/Semester-6/vmnl-audio)
+    Updating crates.io index
+    Packaged 130 files, 915.3KiB (181.0KiB compressed)
+   Verifying vmnl_audio v0.1.0 (/home/h/p/Semester-6/vmnl-audio)
+   Compiling vmnl_audio v0.1.0 (/home/h/p/Semester-6/vmnl-audio/target/package/vmnl_audio-0.1.0)
+    Finished `dev` profile [optimized + debuginfo] target(s) in 2.14s
+   Uploading vmnl_audio v0.1.0 (/home/h/p/Semester-6/vmnl-audio)
+warning: aborting upload due to dry run

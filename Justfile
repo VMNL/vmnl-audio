@@ -50,5 +50,10 @@ test-native-compile:
 test-native:
     cargo test --test audio-backend --locked -- --ignored --test-threads=1
 
+# Launch interactive controls by default; pass an example and optional file/--help.
+[positional-arguments]
+run example="playback_controls" *args:
+    cargo run --locked --example "$1" -- "${@:2}"
+
 package:
     python3 tools/check_package.py

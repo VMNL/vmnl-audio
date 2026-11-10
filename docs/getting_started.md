@@ -16,13 +16,23 @@ an explicit `.thread(true)` choice; the library default remains manual.
 Run a bundled example from the repository root:
 
 ```sh
+just run
+just run play_sound
+just run stream_music
+just run manual_control --help
+```
+
+`just run` opens the interactive controls by default. Without Just, use Cargo:
+
+```sh
 cargo run --example play_sound --locked
 cargo run --example stream_music --locked
 cargo run --example playback_controls --locked
 cargo run --example manual_control --locked -- --help
 ```
 
-Examples use original synthetic WAVs and accept an optional source path after
-`--`. Enter or stdin EOF exits; the interactive example also accepts `quit`.
+Examples use original synthetic WAVs and accept an optional source path. Cargo
+requires `--` before example arguments; `just run` forwards them for you. Enter
+or stdin EOF exits; the interactive example also accepts `quit`.
 `--help` never opens a device. Actual playback needs a usable native audio route.
 See [example controls and error handling](examples.md).

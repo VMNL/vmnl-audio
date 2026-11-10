@@ -19,3 +19,10 @@ availability, disconnection/recovery, shutdown timing, listening quality and cal
 deadlines remain separate qualification tasks. Consult [testing](testing.md) before
 running devices; Linux builds require ALSA development files even for headless tests.
 No Vulkan, GLFW or display server is required by this package.
+
+## Local native evidence
+
+The [qualification record](qualification.md) reports Linux ALSA/PipeWire startup,
+control and nominal device-drop scenarios. It is scoped to its source checksums,
+host and workload. It does not qualify Windows/macOS native output, human listening,
+backend disconnection/recovery or realtime deadlines.
