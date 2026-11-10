@@ -118,4 +118,8 @@ if ! has_version cargo-public-api "$PUBLIC_API_VERSION"; then
         --root "$TOOLS_ROOT"
 fi
 
+# cargo-public-api's offline metadata needs the whole lock graph, including
+# dependencies for platforms other than this documentation host.
+cargo fetch --locked
+
 printf 'API documentation tools ready in %s\n' "$BIN_DIR"

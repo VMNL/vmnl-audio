@@ -61,8 +61,10 @@ this bootstrap on all target platforms.
 
 `Justfile` puts local tools first. `docs-api-check` fails for absent/wrong versions;
 only `docs-api-update` intentionally rewrites tracked inventories. Network access
-is needed for initial Cargo dependencies and tool preparation; API extraction
-then uses Cargo offline with its own target directory. Regular Rustdoc/snippets
+is needed for initial Cargo dependencies and tool preparation. Preparation runs
+`cargo fetch --locked` for the complete lock graph: offline API metadata also
+needs dependencies for other platforms, which a host-only build may not fetch.
+API extraction then uses Cargo offline with its own target directory. Regular Rustdoc/snippets
 use the chosen stable/MSRV compiler, not the API nightly. The docs pipeline expects
 the repository-local `target/` directory (no custom `CARGO_TARGET_DIR`).
 
