@@ -12,22 +12,22 @@
 #![allow(dead_code, unused_imports)]
 
 // Load this module normally so its inner Rustdoc remains valid.
-#[path = "../../crates/vmnl_audio/src/audio/stream_decoder.rs"]
+#[path = "../../src/audio/stream_decoder.rs"]
 pub(crate) mod stream_decoder;
 
-#[path = "../../crates/vmnl_audio/src/audio/snapshot.rs"]
+#[path = "../../src/audio/snapshot.rs"]
 pub(crate) mod snapshot;
 
-#[path = "../../crates/vmnl_audio/src/audio/output_config.rs"]
+#[path = "../../src/audio/output_config.rs"]
 pub(crate) mod output_config;
 
 pub(crate) mod audio {
     pub(crate) mod error {
-        include!("../../crates/vmnl_audio/src/audio/error.rs");
+        include!("../../src/audio/error.rs");
     }
 
     pub(crate) mod bus {
-        include!("../../crates/vmnl_audio/src/audio/bus.rs");
+        include!("../../src/audio/bus.rs");
     }
 
     pub(crate) use super::output_config;
@@ -35,7 +35,7 @@ pub(crate) mod audio {
     pub(crate) use super::stream_decoder;
 
     pub(crate) mod decoder {
-        include!("../../crates/vmnl_audio/src/audio/decoder.rs");
+        include!("../../src/audio/decoder.rs");
 
         #[cfg(test)]
         pub(crate) mod test_support {
@@ -159,7 +159,7 @@ pub(crate) mod audio {
         pub(crate) use voice::SoundVoice;
 
         pub(crate) mod voice {
-            include!("../../crates/vmnl_audio/src/audio/sound/voice.rs");
+            include!("../../src/audio/sound/voice.rs");
 
             #[cfg(test)]
             mod voice_tests {
@@ -258,7 +258,7 @@ pub(crate) mod audio {
         pub(crate) use stream::MusicStream;
 
         pub(crate) mod stream {
-            include!("../../crates/vmnl_audio/src/audio/music/stream.rs");
+            include!("../../src/audio/music/stream.rs");
 
             #[cfg(test)]
             mod sample_ring_tests {
@@ -612,14 +612,14 @@ pub(crate) mod audio {
     }
 
     pub(crate) mod mixer {
-        include!("../../crates/vmnl_audio/src/audio/mixer.rs");
+        include!("../../src/audio/mixer.rs");
     }
 
     pub(crate) mod runtime {
-        include!("../../crates/vmnl_audio/src/audio/runtime.rs");
+        include!("../../src/audio/runtime.rs");
     }
 
     pub(crate) mod worker {
-        include!("../../crates/vmnl_audio/src/audio/worker.rs");
+        include!("../../src/audio/worker.rs");
     }
 }

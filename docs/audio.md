@@ -2,40 +2,30 @@
 
 ## Status and Scope
 
-This document defines the acceptance target for the audio integration in PR #84. It records
-the backend and facade decisions and the behavior required before that integration is complete.
+This document defines the acceptance target for the standalone `vmnl_audio` crate,
+originally developed in [VMNL/vmnl#84](https://github.com/VMNL/vmnl/pull/84). It records
+the backend and execution decisions and the behavior required for complete qualification.
 It is not a claim that the current implementation already satisfies every requirement. Public
 Rustdoc describes item-level behavior and current limitations; this document defines the target
 against which the remaining implementation work is evaluated.
 
-`vmnl_audio` uses CPAL. The facade defaults to graphics and exposes audio through opt-in
-`audio`; disable default features for audio without graphics. The VMNL control worker
+`vmnl_audio` uses CPAL directly, without a facade or graphics dependency. Its control worker
 is disabled by default. Terminal states, consumed-frame cursors, live looping,
 mute/pause semantics, and snapshot heap behaviour have device-independent regression coverage.
 Native shutdown and realtime timing remain unqualified. The audio test files are registered as
 separate [device-independent and native Cargo targets](testing.md#audio-tests); their scope does
-not establish complete acceptance of the facade, execution defaults, or native backend.
+not establish complete acceptance of the execution defaults or native backend.
 
 ## Backend and Public Boundary
 
-CPAL remains the private device backend for #84. VMNL owns playback, mixing, decoding, error
+CPAL remains the private device backend. The crate owns playback, mixing, decoding, error
 translation, and resource lifetimes; clients use VMNL types. Replacing CPAL with miniaudio or
-supporting multiple device backends is outside this PR's scope. This decision preserves the
+supporting multiple device backends is outside this extraction's scope. This decision preserves the
 existing implementation; it does not assert a performance advantage over miniaudio.
 
-The domain crate remains independently usable. The facade retains graphics by default and adds
-audio as an opt-in domain:
-
-| Facade configuration | Required dependency and API boundary |
-| --- | --- |
-| Default features | Graphics remains available through the existing exports. Audio is disabled. |
-| `graphics` only | Graphics dependency and existing graphics exports. |
-| `audio`, with default features disabled | Audio through `vmnl::audio`; no graphics, Vulkan, GLFW, or graphics initialization. |
-| `graphics` and `audio` | Both domains, with independent device/runtime ownership. |
-
-The graphics dependency and its exports are conditional on `graphics`. With no features, the
-facade compiles without any domain. Using audio does not require a graphics `Context`. Direct use of `vmnl_audio` remains
-supported. Removing the facade or splitting repositories is deferred until after #84.
+Clients depend directly on `vmnl_audio` and import its public types from the crate root.
+The package owns its Cargo metadata and test targets. It does not depend on another VMNL
+crate, a graphics `Context`, Vulkan or GLFW; output requires a usable native audio device.
 
 ## Decoding and Output Selection
 
@@ -236,8 +226,8 @@ The implementation must supply these distinct checks; this list is not a record 
 
 | Requirement | Evidence |
 | --- | --- |
-| Independent domains | Compile the facade with graphics only, audio only, and both; inspect the audio-only dependency graph for graphics/Vulkan/GLFW. |
-| Public facade | Headless API tests through `vmnl::audio`, alongside independent domain-crate tests and existing graphics API tests. |
+| Independent package | Build and test a standalone clone; inspect the dependency graph for parent-workspace, graphics, Vulkan or GLFW dependencies. |
+| Public API | Device-independent contracts through the compiled `vmnl_audio` crate, alongside private implementation tests and separate native probes. |
 | Execution mode | Deterministic tests for the default and resolved mode; verify automatic `update()` does not introduce a second control producer. |
 | Playback semantics | Device-independent tests for every state transition, stop/completion races, bus/handle pause combinations, mute, and zero volume. |
 | Streaming and cursors | Exact and partial buffers, buffered EOF, looping changes before/after stop, and underrun position accounting. |

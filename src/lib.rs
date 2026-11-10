@@ -26,9 +26,8 @@
 //! This API is experimental. Snapshot heap behaviour has device-independent
 //! regression coverage; native shutdown and realtime timing remain unqualified.
 //! The required target is recorded in the
-//! [audio acceptance contract](https://github.com/VMNL/vmnl/blob/main/docs/audio.md).
-//! The optional `vmnl::audio` facade exposes these same types without graphics
-//! when the facade's default features are disabled.
+//! [audio acceptance contract](https://github.com/VMNL/vmnl-audio/blob/main/docs/audio.md).
+//! Use this crate directly; it does not require a VMNL facade or graphics context.
 //!
 //! # Configure without opening a device
 //!

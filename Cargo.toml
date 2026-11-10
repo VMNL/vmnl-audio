@@ -1,0 +1,72 @@
+[package]
+name = "vmnl_audio"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+rust-version = "1.87"
+repository = "https://github.com/VMNL/vmnl-audio"
+homepage = "https://github.com/VMNL/vmnl-audio"
+documentation = "https://docs.rs/vmnl_audio"
+readme = "README.md"
+description = "Independent VMNL audio playback with a private CPAL backend"
+keywords = ["audio", "sound", "music"]
+categories = ["audio"]
+
+[[test]]
+name = "audio"
+path = "tests/audio/main.rs"
+
+[[test]]
+name = "audio-backend"
+path = "tests/audio/backend.rs"
+
+[dependencies]
+hound = "3.5"
+lewton = "0.10"
+minimp3 = "0.5"
+claxon = "0.4"
+
+parking_lot = "0.12"
+
+cpal = "0.18.2"
+
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.dev]
+opt-level = 3
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+
+[lints.rust]
+unsafe_op_in_unsafe_fn = "deny"
+missing_docs = "warn"
+rust_2018_idioms = { level = "warn", priority = -1 }
+
+[lints.rustdoc]
+broken_intra_doc_links = "deny"
+bare_urls = "warn"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+pedantic = { level = "warn", priority = -1 }
+cargo = { level = "warn", priority = -1 }
+undocumented_unsafe_blocks = "deny"
+missing_safety_doc = "deny"
+unwrap_used = "warn"
+expect_used = "warn"
+panic = "warn"
+todo = "warn"
+unimplemented = "warn"
+dbg_macro = "deny"
+cast_possible_truncation = "warn"
+cast_possible_wrap = "warn"
+cast_sign_loss = "warn"
+cast_precision_loss = "warn"
+cast_ptr_alignment = "warn"
+multiple_crate_versions = "allow"
+print_stdout = "warn"
+print_stderr = "warn"

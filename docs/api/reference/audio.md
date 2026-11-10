@@ -2,15 +2,14 @@
 
 ## Public path and maturity
 
-`vmnl::audio`, enabled by the `audio` feature. All audio types are experimental.
-The independently usable `vmnl_audio` crate exports the same types; the facade adds no wrapper.
-For an audio-only development client, adjust this checkout path to your client location:
+The standalone `vmnl_audio` crate exports all public types directly. All audio types are
+experimental. For a development client, adjust this checkout path to your client location:
 
 ```toml
-vmnl = { path = "../vmnl/crates/vmnl", default-features = false, features = ["audio"] }
+vmnl_audio = { path = "../vmnl-audio" }
 ```
 
-VMNL has no published release yet.
+This repository has no prepared public release yet.
 
 ## Purpose and use cases
 
@@ -20,8 +19,8 @@ GLFW, or display dependency. Playback requires a usable audio output device.
 
 ## Public API
 
-All paths below are under `vmnl::audio`. Exact signatures and item-local contracts are in
-Rustdoc, linked from the [symbol index](../appendices/public_symbol_index.md).
+All paths below are under `vmnl_audio`. Exact signatures and item-local contracts are in
+Rustdoc, generated with `cargo doc --no-deps`.
 
 | Type | Fields, variants, and inherent methods |
 |---|---|
@@ -134,7 +133,7 @@ Configuration/builder creation does not open a device. Device construction can a
 start backend execution; automatic control adds a VMNL worker. Loading/play can allocate, lock
 and perform file I/O; sound caches full PCM, while music prepares a decoder/ring per instance.
 Manual update also decodes/refills and cleans up on the caller. Never run these operations on
-an audio data callback. There is no GPU upload or Vulkan dependency in audio-only mode.
+an audio data callback. There is no GPU upload or Vulkan dependency.
 
 The data callback mixes prepared PCM. Snapshot acquisition uses fixed slots and atomic ownership
 transfer; returned resources are destroyed on the control side. Work still depends on frames
@@ -145,7 +144,7 @@ error-callback formatting/locking, hardware deadlines, or native shutdown.
 
 Headless checks do not prove device availability. Linux compilation needs ALSA development files,
 even for device-independent tests; see [build prerequisites](../../build.md). Native tests are
-opt-in and distinct from listening evidence. Feature compilation does not qualify native
+opt-in and distinct from listening evidence. Compilation does not qualify native
 Windows/macOS, listening, container padding/timing, or realtime performance.
 
 ## Example and related types
@@ -153,8 +152,8 @@ Windows/macOS, listening, container padding/timing, or realtime performance.
 Configure without opening a device:
 
 ```rust
-# extern crate vmnl;
-use vmnl::audio::{AudioDevice, ControlMode};
+# extern crate vmnl_audio;
+use vmnl_audio::{AudioDevice, ControlMode};
 assert_eq!(AudioDevice::builder().control_mode(), ControlMode::Manual);
 assert_eq!(AudioDevice::builder().thread(true).control_mode(), ControlMode::Automatic);
 ```
@@ -162,8 +161,8 @@ assert_eq!(AudioDevice::builder().thread(true).control_mode(), ControlMode::Auto
 Manual streaming requires a device and a control loop:
 
 ```rust,no_run
-# extern crate vmnl;
-use vmnl::audio::{AudioDevice, AudioResult};
+# extern crate vmnl_audio;
+use vmnl_audio::{AudioDevice, AudioResult};
 # fn main() -> AudioResult<()> {
 let audio = AudioDevice::builder().build()?;
 let music = audio.load_music("assets/music.ogg")?;
@@ -178,5 +177,5 @@ while handle.is_playing() {
 
 The sleep is illustrative, not a buffer-supply guarantee. Use `thread(true)` for a VMNL worker
 and monitor `take_background_error()`; the caller need not run refill cycles in that mode.
-Related: [facade features](facade.md), [acceptance contract](../../audio.md), and
+Related: [acceptance contract](../../audio.md) and
 [test evidence](../../testing.md#audio-tests).

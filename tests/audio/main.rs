@@ -3,8 +3,8 @@
 
 //! Device-independent public and implementation-conformance tests for `vmnl_audio`.
 //!
-//! This target is registered from `crates/vmnl_audio/Cargo.toml`, but every
-//! test file remains in the repository-level `tests/audio/` directory.
+//! This target is registered in the root `Cargo.toml`; its supporting modules
+//! and fixtures remain in `tests/audio/`.
 
 // Test fixtures fail loudly with expect/panic; exact float checks verify
 // round trips and controlled PCM samples, not approximate DSP measurements.
