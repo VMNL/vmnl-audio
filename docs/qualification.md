@@ -63,12 +63,20 @@ qualification, and no hardware presentation measurement. Frozen cursors establis
 only the finite observation window. The external watchdog bounds a failed test
 process; it does not establish an API shutdown deadline.
 
+## Operator feedback — 2026-11-10
+
+The operator reported: **"Le test audio fonctionne"** (the audio test works).
+This is a positive manual audio result. The report does not specify the OS,
+output route, source or individual control observations; the complete listening
+checklist therefore remains partial. It is separate from the automated Linux
+execution and timing observations above.
+
 ## Remaining evidence
 
 | Requirement | Status | Needed next |
 |---|---|---|
 | Windows and macOS native output | NOT RUN | Execute the same probes on usable stereo routes; record exact source and environment. Hosted CI only compiles these probes. |
-| Human listening | NOT RUN | Operator report with OS, device/route, source file, volume and observed controls/EOF/loop transitions. |
+| Human listening | PARTIAL | Positive operator audio result above; still needs OS, device/route, source, volume and explicit controls/EOF/loop observations. |
 | CPAL disconnection/error/recovery | NOT RUN | Explicit device/route failure scenario and resulting diagnostics/lifecycle observations. Decoder errors do not substitute for this. |
 | Callback deadlines and underruns | NOT RUN | Defined workload and backend buffer/rate data, native callback instrumentation and measured timing/underruns. |
 | Shutdown with blocked/slow decoding or I/O | NOT RUN | Controlled delay and lifecycle observations; nominal drop times above are insufficient. |
