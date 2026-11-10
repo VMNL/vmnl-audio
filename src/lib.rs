@@ -43,7 +43,25 @@
 //! # }
 //! ```
 //!
-//! # Manual control
+//! # Automatic control
+//!
+//! Select the worker explicitly and keep the device alive in your application.
+//! No caller-side refill loop or sleep is required in this mode. Inspect
+//! [`AudioDevice::take_background_error`] from the application's control code.
+//!
+//! ```no_run
+//! use vmnl_audio::{AudioDevice, AudioResult};
+//! # fn main() -> AudioResult<()> {
+//! let audio = AudioDevice::builder().thread(true).build()?;
+//! let sound = audio.load_sound("examples/assets/effect.wav")?;
+//! let handle = sound.play()?;
+//! // Keep audio alive while the application's event loop runs.
+//! handle.stop();
+//! # Ok(())
+//! # }
+//! ```
+//!
+//! # Advanced manual control
 //!
 //! Opening a device needs a usable native output backend. This example compiles
 //! without running that backend; the application must keep updating its control

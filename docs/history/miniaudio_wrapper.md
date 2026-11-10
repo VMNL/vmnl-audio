@@ -1,7 +1,7 @@
 # Historical Audio Design Draft
 
 This draft describes the original miniaudio design and is retained for migration context. #84
-uses CPAL; the [audio acceptance contract](audio.md) defines the selected backend, facade scope,
+uses CPAL; the [audio acceptance contract](../audio.md) defines the selected backend, package scope,
 and required behavior. The draft below is not an authoritative description of the current API.
 
 Audio Architecture

@@ -1,0 +1,154 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  CARGO_INCREMENTAL: "0"
+
+jobs:
+  quality:
+    name: Quality (Linux, Rust 1.87)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      RUSTUP_TOOLCHAIN: 1.87.0
+      VMNL_EXPECTED_HOST: x86_64-unknown-linux-gnu
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
+        with:
+          toolchain: 1.87.0
+          components: rustfmt, clippy
+      - name: Verify selected compiler and host
+        run: python3 tools/check_toolchain.py
+      - name: Install Linux audio build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev pkg-config
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-${{ runner.arch }}-cargo-${{ hashFiles('Cargo.lock') }}
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Strict Clippy, all targets
+        run: cargo clippy --all-targets --all-features --locked -- -D warnings
+      - name: Test documentation and packaging tooling
+        run: python3 -m unittest discover -s tools/tests
+      - name: Check byte-reproducible synthetic audio
+        run: python3 tools/generate_example_audio.py --check
+
+  tests:
+    name: Tests (${{ matrix.platform.name }}, Rust ${{ matrix.toolchain }})
+    runs-on: ${{ matrix.platform.runner }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        toolchain: [1.87.0, stable]
+        platform:
+          - name: Linux x86_64
+            runner: ubuntu-24.04
+            host: x86_64-unknown-linux-gnu
+          - name: macOS arm64
+            runner: macos-15
+            host: aarch64-apple-darwin
+          - name: Windows x86_64
+            runner: windows-2022
+            host: x86_64-pc-windows-msvc
+    env:
+      RUSTUP_TOOLCHAIN: ${{ matrix.toolchain }}
+      VMNL_EXPECTED_HOST: ${{ matrix.platform.host }}
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
+        with:
+          toolchain: ${{ matrix.toolchain }}
+      - name: Verify selected compiler and host
+        run: python tools/check_toolchain.py
+      - name: Install Linux audio build prerequisites
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev pkg-config
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-${{ runner.arch }}-cargo-${{ hashFiles('Cargo.lock') }}
+      - name: Build all targets including examples and native probes
+        run: cargo build --all-targets --all-features --locked
+      - name: Public doctests (native examples compile only)
+        run: cargo test --all-features --doc --locked
+      - name: Unit tests
+        run: cargo test --lib --locked
+      - name: Device-independent audio tests
+        run: cargo test --test audio --locked
+      - name: Example help without native playback
+        run: python tools/check_examples.py
+      - name: Compile native probes without executing them
+        run: cargo test --test audio-backend --no-run --locked
+
+  documentation:
+    name: Documentation and package (Linux, Rust 1.87)
+    needs: [quality, tests]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      RUSTUP_TOOLCHAIN: 1.87.0
+      VMNL_EXPECTED_HOST: x86_64-unknown-linux-gnu
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
+        with:
+          toolchain: 1.87.0
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8
+        with:
+          toolchain: nightly-2026-03-12
+      - name: Verify regular compiler after installing API-only nightly
+        run: |
+          python3 tools/check_toolchain.py
+          rustc +nightly-2026-03-12 --version
+      - name: Install Linux audio build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2-dev pkg-config
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: ~/.cargo/registry
+          key: ${{ runner.os }}-${{ runner.arch }}-cargo-${{ hashFiles('Cargo.lock') }}
+      - uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: target/api-tools
+          key: ${{ runner.os }}-${{ runner.arch }}-api-tools-${{ hashFiles('tools/api_docs_tools.sh') }}
+      - name: Explicit pinned tool preparation
+        run: |
+          bash tools/api_docs_tools.sh
+          echo "$GITHUB_WORKSPACE/target/api-tools/bin" >> "$GITHUB_PATH"
+      - run: just build
+      - run: just doctest
+      - run: just docs
+      - run: just docs-api-check
+      - run: just package
+      - name: Upload API book and Rustdoc together
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: vmnl-audio-documentation
+          path: target/documentation/
+          if-no-files-found: error
