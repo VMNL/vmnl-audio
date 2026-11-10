@@ -83,8 +83,9 @@ execution and timing observations above.
 | Encoder delay, container padding/timing | NOT RUN | Reference streams with known timing and expected decoded/presented boundaries. |
 | Registry name/ownership and first compatibility baseline | NOT RUN | Review at the actual release candidate before any manual publication. A successful dry-run neither reserves the name nor establishes ownership. |
 
-The import PR remains a draft. This record does not authorize merging, closing
-the original audio PR, removing the original VMNL facade, or publishing a release.
+Remaining qualification gaps are tracked independently of the import PR's merge
+status. This record does not authorize closing the original audio PR, removing
+the original VMNL facade, or publishing a release.
 
 ## Reproduce and extend
 
