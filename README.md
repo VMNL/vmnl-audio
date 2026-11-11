@@ -9,9 +9,9 @@ Cached sounds, streamed music, and explicit playback control with a private CPAL
 <br>
 
 ![Rust](https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white)
-![Linux CI](https://img.shields.io/badge/Linux_CI-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Windows CI](https://img.shields.io/badge/Windows_CI-0078D6?style=for-the-badge)
-![macOS CI](https://img.shields.io/badge/macOS_CI-000000?style=for-the-badge&logo=apple&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux_CI-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Windows](https://img.shields.io/badge/Windows_CI-0078D6?style=for-the-badge)
+![macOS](https://img.shields.io/badge/macOS_CI-000000?style=for-the-badge&logo=apple&logoColor=white)
 
 <br>
 
@@ -23,10 +23,6 @@ Cached sounds, streamed music, and explicit playback control with a private CPAL
 </div>
 
 ---
-
-> [!WARNING]
-> **Experimental and not yet released.** The API may change while the initial `0.1.0` contract is
-> prepared. Do not use in production.
 
 ## Table of Contents
 
