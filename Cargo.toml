@@ -10,7 +10,7 @@ documentation = "https://docs.rs/vmnl_audio"
 readme = "README.md"
 description = "Independent VMNL audio playback with a private CPAL backend"
 keywords = ["audio", "sound", "music"]
-categories = ["audio"]
+categories = ["multimedia::audio"]
 
 [[test]]
 name = "audio"
