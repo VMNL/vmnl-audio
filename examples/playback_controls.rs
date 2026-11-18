@@ -10,8 +10,24 @@ mod common;
 use std::io::{self, BufRead};
 use vmnl_audio::{AudioDevice, MusicPlayConfig};
 
-const COMMANDS: &str =
-    "pause | resume | volume <0..1> | mute | unmute | loop on/off | stop | play | status | quit";
+const COMMANDS: &str = "\
+╭──────────── \x1b[1mAudio Commands\x1b[0m ────────────╮
+  \x1b[2mListening\x1b[0m
+    \x1b[4mplay\x1b[0m          \x1b[3mPlay the sound\x1b[0m
+    \x1b[4mpause\x1b[0m         \x1b[3mPause the sound\x1b[0m
+    \x1b[4mresume\x1b[0m        \x1b[3mUnpause the sound\x1b[0m
+    \x1b[4mstop\x1b[0m          \x1b[3mStop the sound\x1b[0m
+
+  \x1b[2mSettings\x1b[0m
+    \x1b[4mvolume 0.5\x1b[0m    \x1b[3mChange volume (values from 0 to 1)\x1b[0m
+    \x1b[4mmute\x1b[0m          \x1b[3mMute the sound\x1b[0m
+    \x1b[4munmute\x1b[0m        \x1b[3mUnmute the sound\x1b[0m
+    \x1b[4mloop on/off\x1b[0m   \x1b[3mLoop on the sound / deactivate the loop\x1b[0m
+
+  \x1b[2mInformation\x1b[0m
+    \x1b[4mstatus\x1b[0m        \x1b[3mDisplay status\x1b[0m
+    \x1b[4mquit\x1b[0m          \x1b[3mQuit\x1b[0m
+╰───────────────────────────────────────╯";
 
 fn main() -> common::ExampleResult {
     let Some(path) = common::source_path("music.wav", COMMANDS)? else {
