@@ -13,12 +13,11 @@ handle.stop();
 # }
 ```
 
-This snippet demonstrates construction only; it stops immediately. The runnable
-`stream_music` example waits for stdin. `load_music` checks initial metadata;
-each play opens its own decoder, allocates and prefills its ring before registration.
-Late decoding failures remain possible. Inspect `take_background_error()` during
-the application's lifetime and before teardown.
+This snippet demonstrates construction only; it stops immediately. The runnable `stream_music`
+example waits for stdin. `load_music` checks initial metadata; each play opens its own decoder,
+allocates and prefills its ring before registration. Late decoding failures remain possible. Inspect
+`take_background_error()` during the application's lifetime and before teardown.
 
-`set_looping(false)` preserves prefetched PCM, including repetitions. Replaying
-after stop requires a new handle from the resource. See [Music](../reference/music.md)
-and [MusicHandle](../reference/music_handle.md).
+`set_looping(false)` preserves prefetched PCM, including repetitions. Replaying after stop requires
+a new handle from the resource. See [Music](../reference/music.md) and
+[MusicHandle](../reference/music_handle.md).

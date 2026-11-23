@@ -1,7 +1,7 @@
 # vmnl_audio API
 
-This book describes direct use of the independent `vmnl_audio` package. All types
-are experimental until the first publication. Start with [first sound](workflows/first_sound.md).
+This book describes direct use of the independent `vmnl_audio` package. All types are experimental
+until the first publication. Start with [first sound](workflows/first_sound.md).
 
 - [Concepts](concepts/resources.md): resources, instances, control and costs.
 - [Workflows](workflows/first_sound.md): automatic playback first, manual control when needed.
@@ -10,6 +10,6 @@ are experimental until the first publication. Start with [first sound](workflows
 - [Maintenance](maintenance/validation.md): inventories and documentation checks.
 
 Exact signatures and local contracts belong to [Rustdoc](../../target/doc/vmnl_audio/index.html).
-The [audio acceptance contract](../audio.md) defines internal invariants and the
-remaining qualification target. This book does not promise native device support
-or realtime performance merely from deterministic tests.
+The [audio acceptance contract](../audio.md) defines internal invariants and the remaining
+qualification target. This book does not promise native device support or realtime performance
+merely from deterministic tests.

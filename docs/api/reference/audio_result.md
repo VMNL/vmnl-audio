@@ -2,17 +2,15 @@
 
 ## Role and public paths
 
-`vmnl_audio::AudioResult<T>`, also under `audio`, aliases
-`Result<T, AudioError>`. Experimental;
+`vmnl_audio::AudioResult<T>`, also under `audio`, aliases `Result<T, AudioError>`. Experimental;
 [Rustdoc](../../../target/doc/vmnl_audio/audio/type.AudioResult.html).
 
 ## Public API, ownership and errors
 
-This is an alias, not a new wrapper or ABI boundary. It introduces no fields,
-variants, inherent methods or explicit implementations of its own. Standard
-`Result` operations and `?` apply. Ownership/costs depend on the success value and
-[AudioError](audio_error.md); constructing a result does not open a backend.
-There are no audio defaults attached to the alias.
+This is an alias, not a new wrapper or ABI boundary. It introduces no fields, variants, inherent
+methods or explicit implementations of its own. Standard `Result` operations and `?` apply.
+Ownership/costs depend on the success value and [AudioError](audio_error.md); constructing a result
+does not open a backend. There are no audio defaults attached to the alias.
 
 ## Example and evidence
 

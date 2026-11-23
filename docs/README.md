@@ -11,8 +11,10 @@
 - [Qualification status](qualification.md): recorded native evidence and remaining requirements.
 - [Deployment](deployment.md): packaging and manual publication policy.
 - [Extraction provenance](history/audio_extraction.md): preserved history and commit map.
-- [Historical miniaudio design](history/miniaudio_wrapper.md): superseded design, not the CPAL contract.
+- [Historical miniaudio design](history/miniaudio_wrapper.md): superseded design, not the CPAL
+  contract.
 - [Coding rules](INSTRUCTIONS.md) and [contributing](../CONTRIBUTING.md).
+- [Markdown style](markdown_style.md): shared formatting rules and content-preservation checks.
 
-Rustdoc owns exact signatures and item-local contracts. The book owns usage;
-`audio.md` owns the technical acceptance target. README files provide navigation.
+Rustdoc owns exact signatures and item-local contracts. The book owns usage; `audio.md` owns the
+technical acceptance target. README files provide navigation.
