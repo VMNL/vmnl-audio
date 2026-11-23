@@ -21,10 +21,9 @@ replay.stop();
 # }
 ```
 
-The runnable `playback_controls` example keeps these operations interactive.
-Handle state queries describe that instance, independently of bus pause/mute and
-device health. Master/category controls do not replace its individual gain.
-`stop_all`, `pause_all` and `resume_all` queue global commands; automatic execution
-may observe them later. Handle/bus operations affect shared state directly, while
-already mixed output is unaffected. Check async diagnostics after commands and
-before exit; one slot is not an event queue. See [gains and time](../concepts/gain_and_time.md).
+The runnable `playback_controls` example keeps these operations interactive. Handle state queries
+describe that instance, independently of bus pause/mute and device health. Master/category controls
+do not replace its individual gain. `stop_all`, `pause_all` and `resume_all` queue global commands;
+automatic execution may observe them later. Handle/bus operations affect shared state directly,
+while already mixed output is unaffected. Check async diagnostics after commands and before exit;
+one slot is not an event queue. See [gains and time](../concepts/gain_and_time.md).

@@ -1,7 +1,7 @@
 # Defaults and policies
 
 | Setting | Default / policy | Explicit control |
-|---|---|---|
+| --- | --- | --- |
 | VMNL control | Manual | `AudioDeviceBuilder::thread(true)` opts into Automatic. |
 | Requested rate | 44,100 Hz | Configuration or builder; inspect device's resolved rate. |
 | Output channels | 2 | Other counts rejected. |
@@ -16,6 +16,6 @@
 | Music ring | Internal 500 ms PCM capacity | No public size control or universal update deadline. |
 | Async diagnostics | One shared last-error slot | `take_background_error()` consumes it. |
 
-Current fixed policies are explicit limitations, not configurable API promises.
-See [device](../reference/audio_device.md), [execution](../concepts/execution.md)
-and [qualification](qualification.md).
+Current fixed policies are explicit limitations, not configurable API promises. See
+[device](../reference/audio_device.md), [execution](../concepts/execution.md) and
+[qualification](qualification.md).

@@ -15,13 +15,13 @@ while !handle.is_stopped() {
 # }
 ```
 
-This is a control-flow sketch, not a recommended busy loop. The runnable
-`manual_control` example uses illustrative pacing and a nonblocking input channel.
-The caller owns cadence and should measure buffer supply for its workload. Neither
-a fixed sleep nor the worker's internal interval is a universal deadline guarantee.
+This is a control-flow sketch, not a recommended busy loop. The runnable `manual_control` example
+uses illustrative pacing and a nonblocking input channel. The caller owns cadence and should measure
+buffer supply for its workload. Neither a fixed sleep nor the worker's internal interval is a
+universal deadline guarantee.
 
-Manual control is the default and still uses independent CPAL output execution.
-`update()` can block on decoding/I/O. Global commands additionally execute a control
-cycle immediately in manual mode. Keep this work off data callbacks. A refill error
-is returned synchronously and stops its instance; inspect backend diagnostics too.
-See [execution](../concepts/execution.md) and [AudioDevice](../reference/audio_device.md).
+Manual control is the default and still uses independent CPAL output execution. `update()` can block
+on decoding/I/O. Global commands additionally execute a control cycle immediately in manual mode.
+Keep this work off data callbacks. A refill error is returned synchronously and stops its instance;
+inspect backend diagnostics too. See [execution](../concepts/execution.md) and
+[AudioDevice](../reference/audio_device.md).

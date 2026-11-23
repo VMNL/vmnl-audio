@@ -16,9 +16,8 @@ second.stop();
 # }
 ```
 
-A resource clone shares PCM/path/runtime, not a playback cursor. Music plays each
-open a separate decoder/ring. Sound has an initial limit of 64 active voices;
-`set_max_sound_voices` clamps zero to one and stops oldest excess voices. There is
-no corresponding public music-stream limit. Mixing work and prepared PCM memory
-grow with active instances. Shared `sfx_bus` and `music_bus` controls affect each
-category together; dropping handles alone does not stop runtime-owned playback.
+A resource clone shares PCM/path/runtime, not a playback cursor. Music plays each open a separate
+decoder/ring. Sound has an initial limit of 64 active voices; `set_max_sound_voices` clamps zero to
+one and stops oldest excess voices. There is no corresponding public music-stream limit. Mixing work
+and prepared PCM memory grow with active instances. Shared `sfx_bus` and `music_bus` controls affect
+each category together; dropping handles alone does not stop runtime-owned playback.

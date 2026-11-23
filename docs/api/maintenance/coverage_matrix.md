@@ -1,9 +1,10 @@
 # Coverage matrix
 
-Maintained manually. Evidence links identify executable contracts, not completed native qualification.
+Maintained manually. Evidence links identify executable contracts, not completed native
+qualification.
 
 | Kind | Symbol | Canonical page | Rustdoc | Evidence |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | struct | `vmnl_audio::AudioBus` | [AudioBus](../reference/audio_bus.md) | [Rustdoc](../../../target/doc/vmnl_audio/audio/struct.AudioBus.html) | [Tests](../../../tests/audio/gain_semantics.rs) |
 | struct | `vmnl_audio::AudioConfig` | [AudioConfig](../reference/audio_config.md) | [Rustdoc](../../../target/doc/vmnl_audio/audio/struct.AudioConfig.html) | [Tests](../../../tests/audio/contracts.rs) |
 | struct | `vmnl_audio::AudioDevice` | [AudioDevice](../reference/audio_device.md) | [Rustdoc](../../../target/doc/vmnl_audio/audio/struct.AudioDevice.html) | [Tests](../../../tests/audio/worker.rs) |

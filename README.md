@@ -64,7 +64,8 @@ Resources can create independent playback instances; cloned handles control the 
 - **Explicit ownership** - the device keeps output alive; resources and playback handles have
   separate responsibilities.
 - **Documented costs** - loading, decoding, music refill, and cleanup belong to the control side.
-- **Observable failures** - synchronous errors and background diagnostics remain available to callers.
+- **Observable failures** - synchronous errors and background diagnostics remain available to
+  callers.
 - **Independent composition** - applications use the audio package directly, alongside their other
   libraries and their own application loop.
 
@@ -79,19 +80,19 @@ flowchart TD
 ```
 
 Keep `AudioDevice` alive for the duration of playback. `Sound` stores decoded PCM; each music
-playback owns its decoder and bounded PCM ring. The output callback consumes prepared PCM and
-mixes it for the device.
+playback owns its decoder and bounded PCM ring. The output callback consumes prepared PCM and mixes
+it for the device.
 
 Two control modes share this ownership model:
 
 - **Manual, by default** - the application calls `update()` from its control loop to process
-  commands, refill music buffers, and clean up finished playbacks. No universal update cadence
-  is guaranteed.
-- **Automatic, explicit `.thread(true)`** - the library worker performs that control work.
-  Clients do not need an `update()` or sleep loop for music refill.
+  commands, refill music buffers, and clean up finished playbacks. No universal update cadence is
+  guaranteed.
+- **Automatic, explicit `.thread(true)`** - the library worker performs that control work. Clients
+  do not need an `update()` or sleep loop for music refill.
 
-CPAL manages output execution in both modes. Neither mode owns the application's event loop.
-See [Architecture](docs/architecture.md) and the [audio contract](docs/audio.md) for boundaries,
+CPAL manages output execution in both modes. Neither mode owns the application's event loop. See
+[Architecture](docs/architecture.md) and the [audio contract](docs/audio.md) for boundaries,
 threading, errors, and ownership invariants.
 
 ---
@@ -138,9 +139,9 @@ development checkout and expect public contracts to change. From a neighboring a
 vmnl_audio = { path = "../vmnl-audio" }
 ```
 
-Import public types directly, for example `vmnl_audio::{AudioDevice, Sound, Music}`.
-See [Getting Started](docs/getting_started.md) for the first playback and
-[Deployment](docs/deployment.md) for the first publication's requirements.
+Import public types directly, for example `vmnl_audio::{AudioDevice, Sound, Music}`. See [Getting
+Started](docs/getting_started.md) for the first playback and [Deployment](docs/deployment.md) for
+the first publication's requirements.
 
 ### Requirements
 
@@ -150,7 +151,8 @@ See [Getting Started](docs/getting_started.md) for the first playback and
 - For playback, a usable native audio output route.
 
 See [Build prerequisites](docs/build.md) for platform setup and the explicit documentation-tool
-installation procedure. Just is optional for Cargo builds and required for the `just` commands below.
+installation procedure. Just is optional for Cargo builds and required for the `just` commands
+below.
 
 ---
 
@@ -162,8 +164,8 @@ cd vmnl-audio
 cargo build --all-targets --locked
 ```
 
-With Just available, `just build` runs the repository's build recipe.
-Generate item-level Rustdoc with `cargo doc --no-deps --locked`.
+With Just available, `just build` runs the repository's build recipe. Generate item-level Rustdoc
+with `cargo doc --no-deps --locked`.
 
 ---
 
@@ -183,8 +185,8 @@ just run manual_control --help
 
 The three ordinary examples explicitly enable `.thread(true)` and wait on stdin. The advanced
 `manual_control` example shows caller-driven `update()` work. All examples use included synthetic
-WAVs by default, accept an optional source path, and handle `--help` before opening a device.
-Enter or stdin EOF exits; the interactive example also accepts `quit`.
+WAVs by default, accept an optional source path, and handle `--help` before opening a device. Enter
+or stdin EOF exits; the interactive example also accepts `quit`.
 
 Without Just:
 
@@ -194,8 +196,8 @@ cargo run --example stream_music --locked -- /path/to/track.flac
 cargo run --example manual_control --locked -- --help
 ```
 
-See [Examples](docs/examples.md) for argument forwarding, diagnostics, control behavior, and
-[asset generation and licensing](examples/assets/README.md).
+See [Examples](docs/examples.md) for argument forwarding, diagnostics, control behavior, and [asset
+generation and licensing](examples/assets/README.md).
 
 ---
 
@@ -217,17 +219,18 @@ Start at the [documentation index](docs/README.md).
 
 ## Contributing
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for the ordered checks and PR conventions, and
-[Coding Instructions](docs/INSTRUCTIONS.md) before changing code or documentation.
-Builds, deterministic tests, native execution, human listening, and realtime measurements provide
-separate evidence; report what was actually checked.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) for the ordered checks and PR conventions, and [Coding
+Instructions](docs/INSTRUCTIONS.md) before changing code or documentation. Builds, deterministic
+tests, native execution, human listening, and realtime measurements provide separate evidence;
+report what was actually checked.
 
 ---
 
 ## References
 
 - [CPAL](https://docs.rs/cpal/0.18.2/cpal/) - private native output backend.
-- [Codec adapters and format restrictions](docs/api/appendices/formats.md) - supported decoding paths.
+- [Codec adapters and format restrictions](docs/api/appendices/formats.md) - supported decoding
+  paths.
 
 ---
 
